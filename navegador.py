@@ -5,11 +5,16 @@ from selenium.webdriver.chrome.service import Service
 import dados
 import tratarplanilha
 import pyautogui
+import subprocess
+
+
+#instala o pyautogui
+subprocess.run(["pip", "install", "pyautogui"], check=True)
 
 #pega o email e senha
-with open('txts/email.txt', 'r') as e:
+with open('C:/Users/Gamer/Documents/MeusProjetos/investidor10/email-e-senha-invst10/email.txt', 'r') as e:
     email = e.read()
-with open('txts/senha.txt', 'r') as r:
+with open('C:/Users/Gamer/Documents/MeusProjetos/investidor10/email-e-senha-invst10/senha.txt', 'r') as r:
     senha = r.read()
 
 id = 0
@@ -45,7 +50,7 @@ time.sleep(4)
 navegador.fullscreen_window()
 navegador.find_element('xpath', '//*[@id="menu-wallets"]').click()
 navegador.fullscreen_window()
-navegador.find_element('xpath', '//*[@id="resume"]/div[4]/div/ul/li[2]/a').click()
+navegador.find_element('xpath', '//*[@id="resume"]/div[4]/div/ul/li[3]/a').click()
 
 
 #incluir lançamento
@@ -67,6 +72,7 @@ for id in range(quantiativo):
      #   continue
 
     compra = dados.tipomov(id)
+    
     tipo = dados.tipoativo(id)
     nome = dados.nomeativo(id)
     data = dados.datadecompra(id)
@@ -78,10 +84,11 @@ for id in range(quantiativo):
     navegador.find_element('xpath', '//*[@id="my-wallets"]/section[1]/div/div[1]/ul/li[6]/a/span').click()
 
     try:
-        navegador.find_element('xpath', '//*[@id="fixed-treasury-entries_wrapper"]/div[1]/div[4]/a').click()
-
-    except:
         navegador.find_element('xpath', '//*[@id="ticker-entries_wrapper"]/div[1]/div[4]/a').click()
+    
+    except:
+        navegador.find_element('xpath', '//*[@id="no-entries"]/div/button').click()
+
 
 
 
