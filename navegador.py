@@ -10,6 +10,8 @@ import subprocess
 
 #instala o pyautogui
 subprocess.run(["pip", "install", "pyautogui"], check=True)
+#instala selenium
+subprocess.run(["pip", "install", "selenium"], check=True)
 
 #pega o email e senha
 with open('C:/Users/Gamer/Documents/MeusProjetos/investidor10/email-e-senha-invst10/email.txt', 'r') as e:
