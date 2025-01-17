@@ -16,6 +16,7 @@ def quantativos():
     with open('txts/adicionar.txt', 'r') as adicionar:
         adicionar = adicionar.readlines()
     quant = len(adicionar)
+    print(f"serão adicionados {quant} ativos")
     return quant
 
 
