@@ -8,10 +8,12 @@ subprocess.run(["pip", "install", "pyautogui"], check=True)
 # Instala selenium
 subprocess.run(["pip", "install", "selenium"], check=True)
 
-#limpa o arquivo adicionar
+# Variável global para armazenar o processo do navegador
+processo_navegador = None
+
+# Limpa o arquivo adicionar
 with open('txts/adicionar.txt', 'w') as file:
     pass  # Isso vai simplesmente abrir e fechar o arquivo, apagando o conteúdo
-
 
 # Função para processar os dados antes de abrir o navegador
 def processar_dados():
@@ -29,11 +31,16 @@ def abrir_navegador_thread():
     thread.start()
 
 def abrir_nav():
+    global processo_navegador
     try:
-        # Processa os dados antes de abrir o navegador
-        processar_dados()
-        # Executa o navegador
-        subprocess.run(["python", "navegador.py"], check=True)
+        if processo_navegador is None or processo_navegador.poll() is not None:
+            # Processa os dados antes de abrir o navegador
+            processar_dados()
+            # Inicia o processo do navegador
+            processo_navegador = subprocess.Popen(["python", "navegador.py"])
+            print("Navegador iniciado.")
+        else:
+            print("O navegador já está aberto.")
     except Exception as e:
         print(f"Erro ao abrir o navegador: {e}")
 
@@ -43,9 +50,15 @@ def fechar_navegador_thread():
     thread.start()
 
 def fechar_nav():
+    global processo_navegador
     try:
-        subprocess.run(["pkill", "-f", "navegador.py"], check=True)  # Finaliza o navegador
-        print("Navegador fechado com sucesso.")
+        if processo_navegador and processo_navegador.poll() is None:
+            processo_navegador.terminate()  # Encerra o processo do navegador
+            processo_navegador.wait()  # Aguarda o encerramento completo
+            print("Navegador fechado com sucesso.")
+        else:
+            print("Nenhum navegador está em execução.")
+        processo_navegador = None  # Limpa a referência
     except Exception as e:
         print(f"Erro ao fechar o navegador: {e}")
 
