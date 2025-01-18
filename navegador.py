@@ -87,15 +87,13 @@ def incluir_lancamento(navegador, id, quantiativo):
         quantidade = dados.quantidade(id)
         valor = dados.valorativo(id)
 
-
-        fechar_tutorial(navegador)
         # Clica para incluir lançamento
-        navegador.find_element('xpath', '//*[@id="my-wallets"]/section[1]/div/div[1]/ul/li[6]/a/span').click()
+        navegador.find_element('xpath', '//*[@id="my-wallets"]/section/div/div[1]/ul/li[6]/a').click()
 
         try:
-            navegador.find_element('xpath', '//*[@id="ticker-entries_wrapper"]/div[1]/div[4]/a').click()
+            navegador.find_element('xpath', '//*[@id="fixed-treasury-entries_wrapper"]/div[1]/div[4]/a').click()
         except:
-            navegador.find_element('xpath', '//*[@id="no-entries"]/div/button').click()
+            navegador.find_element('xpath', '//*[@id="ticker-entries_wrapper"]/div[1]/div[4]/a').click()
 
         if compra == 'Credito':
             print('é compra')
@@ -141,12 +139,18 @@ if __name__ == "__main__":
     with open(senha_path, 'r') as r:
         senha = r.read()
 
+    #atualiza arquivos
+
+
     # Inicializa o navegador e faz login
     navegador = iniciar_navegador()
     fazer_login(navegador, email, senha)
 
     # Aguarda um tempo para garantir que a página tenha carregado completamente
     time.sleep(1)
+
+    #fecha tutorial
+    navegador.find_element('xpath', '//*[@id="modal-sign"]/div/button').click()
 
     # Faz a inclusão dos lançamentos
     quantiativo = tratarplanilha.quantativos()
