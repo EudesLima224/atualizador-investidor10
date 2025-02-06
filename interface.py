@@ -10,7 +10,7 @@ subprocess.run(["pip", "install", "selenium"], check=True)
 
 # Variável global para armazenar o processo do navegador
 processo_navegador = None
-
+21/11/2024
 # Limpa o arquivo adicionar
 with open('txts/adicionar.txt', 'w') as file:
     pass  # Isso vai simplesmente abrir e fechar o arquivo, apagando o conteúdo

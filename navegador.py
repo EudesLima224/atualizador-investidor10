@@ -78,7 +78,7 @@ def preencher_campo(xpath, valor):
 # Função principal para inclusão de lançamentos
 def incluir_lancamento(navegador, id, quantiativo):
     for id in range(quantiativo):
-        print(f'será avaliado o ativo numero {id}')
+        print(f'será avaliado o ativo numero {id}/{quantiativo}')
         
         compra = dados.tipomov(id)
         tipo = dados.tipoativo(id)
