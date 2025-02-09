@@ -7,7 +7,7 @@ import math
 
 
 
-caminho_arquivo = "C:/Users/Gamer/Desktop/atualizador invst 0.2/movimentacoes.xlsx"
+caminho_arquivo = "C:/Users/Gamer/Documents/MeusProjetos/investidor10/atualizador-investidor10\movimentacoes.xlsx"
 
 
 
